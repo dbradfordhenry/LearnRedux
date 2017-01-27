@@ -12,11 +12,11 @@ $(document).foundation();
 //app css
 require('style!css!sass!applicationStyles')
 
-		ReactDOM.render(
-		<p>Final Boilerplate project</p>,
-
-		document.getElementById('app')
-		);
+		// ReactDOM.render(
+		// <p>Final Boilerplate project</p>,
+		//
+		// document.getElementById('app')
+		// );
 
 		// require('./redux-example.jsx');
 				require('./redux-todo-example.jsx');
