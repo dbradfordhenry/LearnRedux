@@ -3,15 +3,9 @@ var redux = require('redux');
 console.log('starting redux example');
 
 
-var stateDefault = {
-  name: 'Annonymous',
-  hobbies: [],
-  movies: []
-};
-var nextHobbyId = 1;
-var nextMovieId = 1;
 
 
+//Name reducer and action generators
 var nameReducer = (state = 'Annonymous', action) => {
   switch (action.type) {
     case 'CHANGE_NAME':
@@ -20,6 +14,16 @@ var nameReducer = (state = 'Annonymous', action) => {
       return state;
   }
 };
+
+var changeName = (name) => {
+  return {
+    type: 'CHANGE_NAME',
+    name
+  }
+};
+
+//Hobbies reducer and action generators
+var nextHobbyId = 1;
 var hobbiesReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_HOBBY':
@@ -36,6 +40,21 @@ var hobbiesReducer = (state = [], action) => {
     return state;
   }
 };
+var addHobby = (hobby) => {
+  return {
+    type: 'ADD_HOBBY',
+    hobby
+  }
+};
+var removeHobby = (id) => {
+  return {
+    type: 'REMOVE_HOBBY',
+    id
+  }
+};
+
+//Movies reducer and action generators
+var nextMovieId = 1;
 var moviesReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_MOVIE':
@@ -52,6 +71,21 @@ var moviesReducer = (state = [], action) => {
     return state;
   }
 };
+var addMovie = (title, genre) => {
+  return {
+    type: 'ADD_MOVIE',
+    title,
+    genre
+  }
+};
+var removeMovie = (id) => {
+  return {
+    type: 'REMOVE_MOVIE',
+    id
+  }
+};
+
+
 var reducer = redux.combineReducers({
   name: nameReducer,
   hobbies: hobbiesReducer,
@@ -77,55 +111,23 @@ console.log('currentState', currentState);
 
 
 
-store.dispatch({
-  type: 'CHANGE_NAME',
-  name: 'Derrick'
-});
+store.dispatch(changeName('Derrick'));
 
-store.dispatch({
-    type: 'ADD_HOBBY',
-    hobby: 'running'
-});
-store.dispatch({
-    type: 'ADD_HOBBY',
-    hobby: 'walking'
-});
+store.dispatch(addHobby('running'));
+store.dispatch(addHobby('fishing'));
 
-store.dispatch({
-  type: 'REMOVE_HOBBY',
-  id: 2
-})
+store.dispatch(removeHobby(2));
 
-var addMovie = {
-  type: 'ADD_MOVIE',
-  title: "Splash",
-  genre: "comedy",
-};
-
-var addMovieDos = {
-  type: 'ADD_MOVIE',
-  title: "Turner and Hooch",
-  genre: "comedy",
-};
-var addMovieTres = {
-  type: 'ADD_MOVIE',
-  title: "Philadelphia",
-  genre: "drama",
-};
-
-var removeMovie = {
-  type: 'REMOVE_MOVIE',
-  id: 1
-}
+store.dispatch(addMovie('Splash', 'comedy'));
+store.dispatch(addMovie('Turner and Hooch', 'comedy'));
+store.dispatch(addMovie('Philadelphia', 'drama'));
 
 
-store.dispatch(addMovie);
-store.dispatch(addMovieDos);
-store.dispatch(addMovieTres);
 
-store.dispatch(removeMovie);
 
-store.dispatch({
-  type: 'CHANGE_NAME',
-  name: 'James'
-});
+
+
+
+store.dispatch(removeMovie(1));
+
+store.dispatch(changeName('James'));
